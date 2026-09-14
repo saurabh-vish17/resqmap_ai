@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: resqmap-backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - backend_data:/app/db
+    environment:
+      - DATABASE_URL=sqlite:////app/db/resqmap.db
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: resqmap-frontend
+    ports:
+      - "80:80"
+      - "3000:80" # Fallback if 80 is in use
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  backend_data:

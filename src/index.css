@@ -1,0 +1,201 @@
+@import "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap";
+@import "tailwindcss";
+
+:root {
+  /* LIGHT THEME */
+  --app-bg-primary: #f8fafc;
+  --app-bg-surface: #ffffff;
+  --app-bg-elevated: #f1f5f9;
+  --app-bg-hover: #e2e8f0;
+  
+  --app-border: #e2e8f0;
+  --app-border-light: #cbd5e1;
+
+  --app-critical-bg: #fee2e2;
+  --app-high-bg: #ffedd5;
+  --app-moderate-bg: #fef9c3;
+  --app-low-bg: #dcfce7;
+
+  --app-text-primary: #0f172a;
+  --app-text-secondary: #475569;
+  --app-text-muted: #64748b;
+  
+  --app-map-bg: #dde6e8;
+  --app-map-attr-bg: rgba(255,255,255,0.8);
+}
+
+.dark {
+  /* DARK THEME (Original) */
+  --app-bg-primary: #0a0e17;
+  --app-bg-surface: #111827;
+  --app-bg-elevated: #1f2937;
+  --app-bg-hover: #374151;
+  
+  --app-border: #1e293b;
+  --app-border-light: #334155;
+
+  --app-critical-bg: #451a1a;
+  --app-high-bg: #452a1a;
+  --app-moderate-bg: #3d3a1a;
+  --app-low-bg: #1a3d2a;
+
+  --app-text-primary: #f1f5f9;
+  --app-text-secondary: #94a3b8;
+  --app-text-muted: #64748b;
+  
+  --app-map-bg: #0a0e17;
+  --app-map-attr-bg: rgba(10, 14, 23, 0.8);
+}
+
+@theme {
+  --color-bg-primary: var(--app-bg-primary);
+  --color-bg-surface: var(--app-bg-surface);
+  --color-bg-elevated: var(--app-bg-elevated);
+  --color-bg-hover: var(--app-bg-hover);
+  --color-border: var(--app-border);
+  --color-border-light: var(--app-border-light);
+
+  --color-critical: #ef4444;
+  --color-critical-bg: var(--app-critical-bg);
+  --color-high: #f97316;
+  --color-high-bg: var(--app-high-bg);
+  --color-moderate: #eab308;
+  --color-moderate-bg: var(--app-moderate-bg);
+  --color-low: #22c55e;
+  --color-low-bg: var(--app-low-bg);
+
+  --color-primary: #3b82f6;
+  --color-primary-hover: #2563eb;
+  --color-accent: #06b6d4;
+  --color-accent-hover: #0891b2;
+  --color-purple: #8b5cf6;
+
+  --color-text-primary: var(--app-text-primary);
+  --color-text-secondary: var(--app-text-secondary);
+  --color-text-muted: var(--app-text-muted);
+
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+}
+
+/* Base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+  height: 100vh;
+}
+
+#root {
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-surface);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-light);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-muted);
+}
+
+/* Leaflet map overrides */
+.leaflet-container {
+  background: var(--app-map-bg) !important;
+  font-family: var(--font-sans) !important;
+}
+
+.leaflet-control-zoom a {
+  background: var(--color-bg-elevated) !important;
+  color: var(--color-text-primary) !important;
+  border-color: var(--color-border) !important;
+}
+
+.leaflet-control-zoom a:hover {
+  background: var(--color-bg-hover) !important;
+}
+
+.leaflet-control-attribution {
+  background: var(--app-map-attr-bg) !important;
+  color: var(--color-text-muted) !important;
+  font-size: 10px !important;
+}
+
+.leaflet-control-attribution a {
+  color: var(--color-text-secondary) !important;
+}
+
+.leaflet-popup-content-wrapper {
+  background: var(--color-bg-elevated) !important;
+  color: var(--color-text-primary) !important;
+  border-radius: 12px !important;
+  border: 1px solid var(--color-border-light) !important;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5) !important;
+}
+
+.leaflet-popup-tip {
+  background: var(--color-bg-elevated) !important;
+  border: 1px solid var(--color-border-light) !important;
+}
+
+.leaflet-popup-close-button {
+  color: var(--color-text-secondary) !important;
+}
+
+/* Pulse animation for markers */
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.5);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 8px rgba(239, 68, 68, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.8);
+  }
+}
+
+.marker-critical {
+  animation: glow 2s ease-in-out infinite;
+}
+
+/* Glass morphism utility */
+.glass {
+  background: rgba(17, 24, 39, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(30, 41, 59, 0.5);
+}
+
+.glass-elevated {
+  background: rgba(31, 41, 55, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(51, 65, 85, 0.4);
+}
